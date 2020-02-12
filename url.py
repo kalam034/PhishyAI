@@ -123,38 +123,38 @@ def uses_default_port_number(url):
   _port = get_port(url)
   return int(_port == 80 or _port == 443)
 
-def get_average_query_value_digit_count(url):
+def get_average_query_value_digit_count(decoded_query_values):
   """Returns the average number of digits of query values as a float.
 
   Digits in the decoded values, e.g. ['$9.99', '3_owls'] are counted.
   """
   return url_utils.get_average_count(
-      get_decoded_query_values(url), url_utils.get_digit_count)
+      decoded_query_values, url_utils.get_digit_count)
 
-def get_total_query_value_digit_count(url):
+def get_total_query_value_digit_count(decoded_query_values):
   """Returns the number of digits found in query values as an int.
 
   Digits in the decoded values, e.g. ['$9.99', '3_owls'] are counted.
   """
-  return url_utils.get_total_count(get_decoded_query_values(url), url_utils.get_digit_count)
+  return url_utils.get_total_count(decoded_query_values, url_utils.get_digit_count)
 
-def get_average_query_value_letter_count(url):
+def get_average_query_value_letter_count(decoded_query_values):
   """Returns the average number of letters of query values as a float.
 
   Letters in the decoded values, e.g. ['a@aol.com', 'a b'], are counted.
   """
   return url_utils.get_average_count(
-      get_decoded_query_values(url), url_utils.get_letter_count)
+      decoded_query_values, url_utils.get_letter_count)
 
-def get_total_query_value_letter_count(url):
+def get_total_query_value_letter_count(decoded_query_values):
   """Returns the number of letters found in query values as an int.
 
   Letters in the decoded values, e.g. ['a@aol.com', 'a b'], are counted.
   """
   return url_utils.get_total_count(
-      get_decoded_query_values(url), url_utils.get_letter_count)
+      decoded_query_values, url_utils.get_letter_count)
 
-def get_average_query_value_symbol_count(url):
+def get_average_query_value_symbol_count(decoded_query_values):
   """Returns the average number of symbols of query values as a float.
 
   Symbols are any characters that are not letters, digits, or ASCII special
@@ -162,9 +162,9 @@ def get_average_query_value_symbol_count(url):
   counted.
   """
   return url_utils.get_average_count(
-      get_decoded_query_values(url), url_utils.get_symbol_count)
+      decoded_query_values, url_utils.get_symbol_count)
 
-def get_total_query_value_symbol_count(url):
+def get_total_query_value_symbol_count(decoded_query_values):
   """Returns the number of symbols found in query values as an int.
 
   Symbols are any characters that are not letters, digits, or ASCII special
@@ -172,23 +172,24 @@ def get_total_query_value_symbol_count(url):
   counted.
   """
   return url_utils.get_total_count(
-      get_decoded_query_values(url), url_utils.get_symbol_count)
+      decoded_query_values, url_utils.get_symbol_count)
 
-def get_max_query_value_length(url):
+def get_max_query_value_length(decoded_query_values):
   """Returns the length of the longest query value as an integer.
 
   The lengths of the decoded values, e.g. ['a@aol.com', 'a b'], are
   considered.
   """
-  return url_utils.get_max_length(get_decoded_query_values(url))
+  return url_utils.get_max_length(decoded_query_values)
 
-def get_average_query_value_length(url):
+def get_average_query_value_length(decoded_query_values):
   """Returns the average length of query values as a float."""
-  return url_utils.get_average_length(get_decoded_query_values(url))
+  return url_utils.get_average_length(decoded_query_values)
 
-def get_total_query_value_length(url):
+def get_total_query_value_length(decoded_query_values):
   """Returns the total length of the query values as an integer."""
-  return url_utils.get_total_length(get_decoded_query_values(url))
+  return url_utils.get_total_length(decoded_query_values)
+
 
 def get_average_query_variable_digit_count(url):
   """Returns the average number of digits of query variables as a float."""

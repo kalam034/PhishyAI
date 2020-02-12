@@ -27,7 +27,7 @@ def extract_features(dataframe):
 
 def pre_process_dataframe(dataframe):
     #dropping unwanted columns
-    dataframe = dataframe.drop(["Url","domain","query","path","file_ext"], axis = 1)
+    dataframe = dataframe.drop(["Url","domain","query","path","file_ext", "decoded_query_values"], axis = 1)
     #changing string values to numeric
     dataframe = dataframe.apply(pd.to_numeric, errors='coerce')
     #filling null values
