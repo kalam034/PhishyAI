@@ -21,4 +21,6 @@ unb_benign_DF["Label"] = 1
 
 merged_df = pd.concat([open_phish_DF, unb_phish_DF, phish_storm_DF, phish_tank_DF, unb_benign_DF], sort = True, axis=0)
 
-merged_df.to_csv("training_datasets/merged_dataframes.csv", encoding='utf-8', header=True, index=False)
+merged_df = merged_df.sample(frac=1).reset_index(drop=True)
+
+merged_df.to_csv("training_datasets/final_merged_dataframes.csv", encoding='utf-8', header=True, index=False)
