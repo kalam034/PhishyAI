@@ -1,8 +1,3 @@
-"""A class for analyzing a URL and its components.
-
-A URL has the general form protocol://domain/path;parameters?query#fragment.
-"""
-
 import os
 from urllib import parse
 
@@ -10,22 +5,19 @@ import url_utils
 
 
 def get_components(url):
-    #self._components = parse.urlparse(self.url)
     return parse.urlparse(url)
 
 def get_protocol(url):
-    #self._protocol = self._components.scheme
     _components = get_components(url)
     return _components.scheme
 
 def get_path_params(url):
-    #self._path_params = self._components.params
     _components = get_components(url)
     return _components.params
 
 def get_path(url):
     """Returns the path as a string."""
-    #self._path = self._components.path
+
     _components = get_components(url)
     return _components.path
 
@@ -36,7 +28,7 @@ def get_file_ext(url):
 
 def get_domain(url):
     """Returns the domain as a string."""
-    #self._domain = self._components.netloc
+
     _components = get_components(url)
     return _components.netloc
 
@@ -55,7 +47,7 @@ def get_fragment(url):
 
 def get_query(url):
     """Returns the query as a decoded string."""
-    #self._query = self._components.query
+
     _components = get_components(url)
     return _components.query
 def extract_file_ext(url):

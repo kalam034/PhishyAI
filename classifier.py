@@ -7,7 +7,6 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier,
 from sklearn.svm import OneClassSVM
 from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score
 from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.exceptions import ConvergenceWarning
 from sklearn.utils.testing import ignore_warnings
 
 def print_number_of_records(dataframe):
@@ -16,7 +15,7 @@ def print_number_of_records(dataframe):
     ml_records = dataframe.loc[dataframe ['Label'] == 1]
 
     print('\n')
-    print("Total number of records in dataframe: " , str(dataframe.shape[0]))
+    print("Total number of records in the dataframe: " , str(dataframe.shape[0]))
     print("Total number of benign records in the dataframe: ", str(bn_records.shape[0]))
     print("Total number of malicious records in the dataframe: ", str(ml_records.shape[0]))
 
@@ -43,7 +42,7 @@ def train_gbt(X_train, y_train):
     gbt = GradientBoostingClassifier(max_depth=3)
     return gbt.fit(X_train, y_train)
 
-@ignore_warnings(category=ConvergenceWarning) #line convergence warnings ignored
+@ignore_warnings() #line convergence warnings ignored
 def train_lgt(X_train, y_train):
     lgt = LogisticRegression(max_iter=200, solver='newton-cg')
     return lgt.fit(X_train, y_train)
@@ -68,11 +67,11 @@ if __name__ == "__main__":
 
     dataframe = pd.read_csv("training_datasets/final_merged_dataframes.csv", header = 0)
 
+    print_number_of_records(dataframe)
+
     dataframe = extract_features(dataframe)
 
     dataframe = pre_process_dataframe(dataframe)
-
-    print_number_of_records(dataframe)
 
     #splitting the data for training and testing
     X = dataframe.drop("Label", axis=1)
