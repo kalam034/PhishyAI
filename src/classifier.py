@@ -84,6 +84,11 @@ if __name__ == "__main__":
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
+    X_train = X_train.to_numpy()
+    X_test = X_test.to_numpy()
+    y_train = y_train.to_numpy()
+    y_test = y_test.to_numpy()
+    
     #training and testing classifiers
     
     #random forest
