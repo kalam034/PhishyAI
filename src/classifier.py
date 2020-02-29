@@ -10,13 +10,13 @@ from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_sc
 from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.utils.testing import ignore_warnings
 
+
 def print_number_of_records(dataframe):
-    
-    bn_records = dataframe.loc[dataframe ['Label'] == 0]
-    ml_records = dataframe.loc[dataframe ['Label'] == 1]
+    bn_records = dataframe.loc[dataframe['Label'] == 0]
+    ml_records = dataframe.loc[dataframe['Label'] == 1]
 
     print('\n')
-    print("Total number of records in the dataframe: " , str(dataframe.shape[0]))
+    print("Total number of records in the dataframe: ", str(dataframe.shape[0]))
     print("Total number of benign records in the dataframe: ", str(bn_records.shape[0]))
     print("Total number of malicious records in the dataframe: ", str(ml_records.shape[0]))
 
@@ -26,30 +26,34 @@ def extract_features(dataframe):
     features = ft.extract_features()
     return features
 
+
 def pre_process_dataframe(dataframe):
-    #dropping unwanted columns
-    dataframe = dataframe.drop(["Url","domain","query","path","file_ext", "decoded_query_values"], axis = 1)
-    #changing string values to numeric
+    # dropping unwanted columns
+    dataframe = dataframe.drop(["Url", "domain", "query", "path", "file_ext", "decoded_query_values"], axis=1)
+    # changing string values to numeric
     dataframe = dataframe.apply(pd.to_numeric, errors='coerce')
-    #filling null values
+    # filling null values
     dataframe.fillna(0, inplace=True)
     return dataframe
+
 
 def train_rfc(X_train, y_train):
     rfc = RandomForestClassifier(n_estimators=5, random_state=42)
     return rfc.fit(X_train, y_train)
 
+
 def train_gbt(X_train, y_train):
     gbt = GradientBoostingClassifier(max_depth=3)
     return gbt.fit(X_train, y_train)
 
-@ignore_warnings() #line convergence warnings ignored
+
+@ignore_warnings()  # line convergence warnings ignored
 def train_lgt(X_train, y_train):
     lgt = LogisticRegression(max_iter=200, solver='newton-cg')
     return lgt.fit(X_train, y_train)
 
+
 def extract_metrics(model, X_test, y_test, model_name):
-  
     pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, pred)
     f1 = f1_score(y_test, pred)
@@ -66,19 +70,20 @@ def extract_metrics(model, X_test, y_test, model_name):
 def save_model(model, path):
     dump(model, path)
 
+
 def load_model(path):
     return load(path)
-    
-if __name__ == "__main__":
 
-    dataframe = pd.read_csv("../data/interim/final_merged_dataframes.csv", header = 0)
+
+if __name__ == "__main__":
+    dataframe = pd.read_csv("../data/interim/final_merged_dataframes.csv", header=0)
 
     print_number_of_records(dataframe)
 
     dataframe = extract_features(dataframe)
 
     dataframe = pre_process_dataframe(dataframe)
-    #splitting the data for training and testing
+    # splitting the data for training and testing
     X = dataframe.drop("Label", axis=1)
     y = dataframe["Label"]
 
@@ -88,18 +93,18 @@ if __name__ == "__main__":
     X_test = X_test.to_numpy()
     y_train = y_train.to_numpy()
     y_test = y_test.to_numpy()
-    
-    #training and testing classifiers
-    
-    #random forest
+
+    # training and testing classifiers
+
+    # random forest
     rf = train_rfc(X_train, y_train)
     extract_metrics(rf, X_test, y_test, "Random Forest")
 
-    #gradient boosting
+    # gradient boosting
     gbt = train_gbt(X_train, y_train)
     extract_metrics(gbt, X_test, y_test, "Gradient Boosting ")
 
-    #logistic regression
+    # logistic regression
     lgt = train_lgt(X_train, y_train)
 
     extract_metrics(lgt, X_test, y_test, "Logistic Regression")
