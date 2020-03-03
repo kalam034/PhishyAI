@@ -1,7 +1,7 @@
 """Utilities for processing URLs."""
 
 import math
-import nltk
+
 import numpy
 
 

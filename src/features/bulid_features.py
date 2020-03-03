@@ -1,9 +1,29 @@
 import pandas as pd
-import url
-import url_utils
+
+from . import url, url_utils
 
 
-def extract_features(dataframe):
+def extract_features():
+    print('\n')
+    print("Extracting Features")
+
+    dataframe = pd.read_csv(
+        "../data/interim/final_merged_dataframes.csv", header=0, low_memory=False)
+
+    dataframe = _extract_url_features_(dataframe)
+    dataframe = _extract_domain_features_(dataframe)
+    dataframe = _extract_path_features_(dataframe)
+    dataframe = _extract_query_features_(dataframe)
+    dataframe = _extract_fragment_features(dataframe)
+    dataframe = _extract_ext_features(dataframe)
+    dataframe = _remove_extra_columns(dataframe)
+    dataframe = _drop_null_values(dataframe)
+
+    dataframe.to_csv("../data/processed/features.csv",
+                     index=False, header=True)
+
+
+def extract_features_df(dataframe):
     dataframe = _extract_url_features_(dataframe)
     dataframe = _extract_domain_features_(dataframe)
     dataframe = _extract_path_features_(dataframe)
@@ -173,13 +193,3 @@ def _remove_extra_columns(dataframe):
 
 def _drop_null_values(dataframe):
     return dataframe.dropna()
-
-
-if __name__ == "__main__":
-    dataframe = pd.read_csv(
-        "../../data/interim/final_merged_dataframes.csv", header=0, low_memory=False)
-
-    dataframe = extract_features(dataframe)
-
-    dataframe.to_csv("../../data/processed/features.csv",
-                     index=False, header=True)

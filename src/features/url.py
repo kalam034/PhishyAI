@@ -1,7 +1,7 @@
 import os
 from urllib import parse
 
-import url_utils
+from . import url_utils
 
 
 def get_components(url):
