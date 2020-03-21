@@ -8,6 +8,6 @@ def url_to_features(url):
 
     dataframe = pd.read_json(data)
 
-    dataframe = ft.extract_features_df(dataframe)
+    dataframe = ft.extract_features(dataframe)
 
-    dataframe.to_numpy()
+    return dataframe.to_numpy()

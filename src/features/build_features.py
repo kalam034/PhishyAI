@@ -3,27 +3,21 @@ import pandas as pd
 from . import url, url_utils
 
 
-def extract_features():
-    print('\n')
-    print("Extracting Features")
+def generate_features():
 
     dataframe = pd.read_csv(
         "../data/interim/final_merged_dataframes.csv", header=0, low_memory=False)
 
-    dataframe = _extract_url_features_(dataframe)
-    dataframe = _extract_domain_features_(dataframe)
-    dataframe = _extract_path_features_(dataframe)
-    dataframe = _extract_query_features_(dataframe)
-    dataframe = _extract_fragment_features(dataframe)
-    dataframe = _extract_ext_features(dataframe)
-    dataframe = _remove_extra_columns(dataframe)
-    dataframe = _drop_null_values(dataframe)
+    dataframe = extract_features(dataframe)
 
     dataframe.to_csv("../data/processed/features.csv",
                      index=False, header=True)
 
+def extract_features(dataframe):
 
-def extract_features_df(dataframe):
+    print('\n')
+    print("Extracting Features")
+
     dataframe = _extract_url_features_(dataframe)
     dataframe = _extract_domain_features_(dataframe)
     dataframe = _extract_path_features_(dataframe)
