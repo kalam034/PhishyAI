@@ -5,9 +5,9 @@ local_dependencies = [
     "main.py"
 ]
 aliased_dependencies = {
-    "../features/build_features.py": "features/build_features.py",
-    "../features/url.py": "features/url.py",
-    "../features/url_utils.py": "features/url_utils.py"
+    "../../src/features/build_features.py": "features/build_features.py",
+    "../../src/features/url.py": "features/url.py",
+    "../../src/features/url_utils.py": "features/url_utils.py"
 }
 
 
