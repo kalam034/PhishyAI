@@ -6,8 +6,6 @@
     * pandas
     * numpy
     * scikit-learn 0.20.4 (google-ai-platform only accepts version 0.20.4)
-    * python >= 3.1.1
-    * 64 bit System Architecture
 
 
 ### Usage 
