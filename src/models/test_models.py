@@ -5,17 +5,17 @@ from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_sc
 
 
 def test_random_forest(X_test, y_test):
-    rf = load("../models/random_forest.joblib")
+    rf = load("models/random_forest.joblib")
     extract_metrics(rf, X_test, y_test, "Random Forest")
 
 
 def test_gradient_boosting_trees_model(X_test, y_test):
-    gbt = load("../models/gradient_boosting_trees.joblib")
+    gbt = load("models/gradient_boosting_trees.joblib")
     extract_metrics(gbt, X_test, y_test, "Gradient Boosting Tree")
 
 
 def test_logistic_regression(X_test, y_test):
-    lgt = load("../models/logistic_regression.joblib")
+    lgt = load("models/logistic_regression.joblib")
     extract_metrics(lgt, X_test, y_test, "Logistic Regression")
 
 
@@ -38,9 +38,9 @@ def test_models():
     print('\n')
     print("Testing the models")
 
-    X_test = pd.read_csv("../data/interim/X_test.csv",
+    X_test = pd.read_csv("data/interim/X_test.csv",
                          header=0, low_memory=False).to_numpy()
-    y_test = pd.read_csv("../data/interim/y_test.csv",
+    y_test = pd.read_csv("data/interim/y_test.csv",
                          header=0, low_memory=False).to_numpy()
 
     test_random_forest(X_test, y_test)

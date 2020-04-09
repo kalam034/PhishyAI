@@ -2,14 +2,14 @@ import pandas as pd
 
 
 def read_open_phish():
-    open_phish_df = pd.read_csv("../data/raw/open_phish.txt", names=["Url"])
+    open_phish_df = pd.read_csv("data/raw/open_phish.txt", names=["Url"])
     open_phish_df['Label'] = 0
 
     return open_phish_df
 
 
 def read_phish_storm():
-    phish_storm_df = pd.read_csv("../data/raw/phish_storm.csv", skipinitialspace=True, encoding="ISO-8859-1",
+    phish_storm_df = pd.read_csv("data/raw/phish_storm.csv", skipinitialspace=True, encoding="ISO-8859-1",
                                  low_memory=False, usecols=["domain", "label"])
     phish_storm_df.columns = ["Url", "Label"]
     phish_storm_df = phish_storm_df.drop(
@@ -22,8 +22,8 @@ def read_phish_storm():
 
 
 def read_unb():
-    unb_phish_df = pd.read_csv("../data/raw/unb_phish.txt", names=["Url"])
-    unb_benign_df = pd.read_csv("../data/raw/unb_benign.txt", names=["Url"])
+    unb_phish_df = pd.read_csv("data/raw/unb_phish.txt", names=["Url"])
+    unb_benign_df = pd.read_csv("data/raw/unb_benign.txt", names=["Url"])
 
     unb_phish_df["Label"] = 0
     unb_benign_df["Label"] = 1
@@ -32,7 +32,7 @@ def read_unb():
 
 
 def read_phish_tank():
-    phish_tank_df = pd.read_csv("../data/raw/phish_tank.csv",
+    phish_tank_df = pd.read_csv("data/raw/phish_tank.csv",
                                 skipinitialspace=True, usecols=["phish_detail_url"])
     phish_tank_df.columns = ["Url"]
     phish_tank_df["Label"] = 0
@@ -42,12 +42,12 @@ def read_phish_tank():
 
 def read_benign():
     benign_data_df = pd.read_csv(
-        "../data/raw/data-benign.csv", skipinitialspace=True, usecols=["link"])
+        "data/raw/data-benign.csv", skipinitialspace=True, usecols=["link"])
     benign_data_df.columns = ["Url"]
     benign_data_df["Label"] = 0
 
     more_benign_data_df = pd.read_csv(
-        "../data/raw/data_more_benign.csv", skipinitialspace=True, usecols=["url"])
+        "data/raw/data_more_benign.csv", skipinitialspace=True, usecols=["url"])
     more_benign_data_df.columns = ["Url"]
     more_benign_data_df["Label"] = 0
 
@@ -56,7 +56,7 @@ def read_benign():
 
 def read_malicious():
     malicious_data_df = pd.read_csv(
-        "../data/raw/data-malicious.csv", skipinitialspace=True, usecols=["link"])
+        "data/raw/data-malicious.csv", skipinitialspace=True, usecols=["link"])
     malicious_data_df.columns = ["Url"]
     malicious_data_df["Label"] = 1
 
@@ -83,5 +83,5 @@ def make_dataset():
     merged_df = merged_df.drop_duplicates(inplace=False)
 
     
-    merged_df.to_csv("../data/interim/final_merged_dataframes.csv",
+    merged_df.to_csv("data/interim/final_merged_dataframes.csv",
                      encoding='utf-8', header=True, index=False)

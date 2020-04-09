@@ -35,7 +35,7 @@ def train_lgt(X_train, y_train):
 def train_models():
 
     dataframe = pd.read_csv(
-        "../data/processed/features.csv", header=0, low_memory=False)
+        "data/processed/features.csv", header=0, low_memory=False)
 
     X = dataframe.drop("Label", axis=1)
     y = dataframe["Label"]
@@ -46,20 +46,20 @@ def train_models():
     y_train = y_train.to_numpy()
 
     X_test = X_test.to_csv(
-        "../data/interim/X_test.csv", index=False, header=True)
+        "data/interim/X_test.csv", index=False, header=True)
     y_test = y_test.to_csv(
-        "../data/interim/y_test.csv", index=False, header=True)
+        "data/interim/y_test.csv", index=False, header=True)
 
     # training
 
     # random forest
     rf = train_rfc(X_train, y_train)
-    dump(rf, "../models/random_forest.joblib")
+    dump(rf, "models/random_forest.joblib")
 
     # gradient boosting
     gbt = train_gbt(X_train, y_train)
-    dump(gbt, "../models/gradient_boosting_trees.joblib")
+    dump(gbt, "models/gradient_boosting_trees.joblib")
 
     # logistic regression
     lgt = train_lgt(X_train, y_train)
-    dump(lgt, "../models/logistic_regression.joblib")
+    dump(lgt, "models/logistic_regression.joblib")

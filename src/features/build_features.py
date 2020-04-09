@@ -6,11 +6,11 @@ from . import url, url_utils
 def generate_features():
 
     dataframe = pd.read_csv(
-        "../data/interim/final_merged_dataframes.csv", header=0, low_memory=False)
+        "data/interim/final_merged_dataframes.csv", header=0, low_memory=False)
 
     dataframe = extract_features(dataframe)
 
-    dataframe.to_csv("../data/processed/features.csv",
+    dataframe.to_csv("data/processed/features.csv",
                      index=False, header=True)
 
 def extract_features(dataframe):

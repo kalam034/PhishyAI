@@ -1,14 +1,8 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-from setuptools import setup, find_packages
-from src import run_pipeline as pipeline
 
+from setuptools import setup, find_packages
 
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
-
-def __post_install__():    
-    pipeline.run_pipeline()
 
 description='Trains a random forest, gradient boost tree and logistic regression model to catch phishing urls'
 setup(  
@@ -25,8 +19,5 @@ setup(
     scripts=['src/run_pipeline.py'],
     packages=find_packages(where="src")
     )
-
-__post_install__()
-
 
 			
