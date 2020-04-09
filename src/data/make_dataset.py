@@ -65,7 +65,7 @@ def read_malicious():
 
 def make_dataset():
     print('\n')
-    print("Generating the Data Set")
+    print("Collecting data from all data sources")
 
     open_phish_df = read_open_phish()
     phish_storm_df = read_phish_storm()
@@ -74,11 +74,14 @@ def make_dataset():
     benign_df = read_benign()
     malicious_df = read_malicious()
 
+    print("Merging all collected data")
+
     merged_df = pd.concat([open_phish_df, unb_df, phish_storm_df, phish_tank_df,
                            benign_df, malicious_df], sort=True, axis=0)
 
     merged_df = merged_df.sample(frac=1).reset_index(drop=True)
     merged_df = merged_df.drop_duplicates(inplace=False)
 
+    
     merged_df.to_csv("../data/interim/final_merged_dataframes.csv",
                      encoding='utf-8', header=True, index=False)

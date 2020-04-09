@@ -7,24 +7,32 @@ from sklearn.utils.testing import ignore_warnings
 
 
 def train_rfc(X_train, y_train):
+    print('\n')
+    print("Training a Random Forest Classifier")
+
     rfc = RandomForestClassifier(n_estimators=5, random_state=42)
     return rfc.fit(X_train, y_train)
 
 
 def train_gbt(X_train, y_train):
+    print('\n')
+    print("Training a Gradient Boosting Classifier")
+
     gbt = GradientBoostingClassifier(max_depth=3)
     return gbt.fit(X_train, y_train)
 
 
 @ignore_warnings()  # line convergence warnings ignored
 def train_lgt(X_train, y_train):
+
+    print('\n')
+    print("Training a Logistic Regression Classifier")
+
     lgt = LogisticRegression(max_iter=100, solver='newton-cg')
     return lgt.fit(X_train, y_train)
 
 
 def train_models():
-    print('\n')
-    print("Training the models")
 
     dataframe = pd.read_csv(
         "../data/processed/features.csv", header=0, low_memory=False)
@@ -48,10 +56,10 @@ def train_models():
     rf = train_rfc(X_train, y_train)
     dump(rf, "../models/random_forest.joblib")
 
-    # logistic regression
-    lgt = train_lgt(X_train, y_train)
-    dump(lgt, "../models/logistic_regression.joblib")
-
     # gradient boosting
     gbt = train_gbt(X_train, y_train)
     dump(gbt, "../models/gradient_boosting_trees.joblib")
+
+    # logistic regression
+    lgt = train_lgt(X_train, y_train)
+    dump(lgt, "../models/logistic_regression.joblib")

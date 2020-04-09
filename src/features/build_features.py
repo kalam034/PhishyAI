@@ -16,7 +16,7 @@ def generate_features():
 def extract_features(dataframe):
 
     print('\n')
-    print("Extracting Features")
+    print("Extracting Features from the Data Set")
 
     dataframe = _extract_url_features_(dataframe)
     dataframe = _extract_domain_features_(dataframe)
