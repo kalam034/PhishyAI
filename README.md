@@ -1,13 +1,16 @@
-## Phishing URL Classifier for a Gmail Extension
+## ML Models to detect phishing attempts
+
+This project leverages ML models to detect phishing attempts by classifying URLs into malicious or benign.  The training data used to train the models consists of 456,577 records with 35% malicious and 65% benign distribution. 51 new features are calculated for each URL based on its properties of domain, path, query, file extension and fragment. The models are trained on the feature of vector of the 51 newly calculated features and afterwards the models are tested with unseen data. Based on the results of the testing, the most appropriate model is deployed on GCP AI Platform to classify URLs in real time for a Gmail extension [Phishy](https://github.com/morch028/phishy). Phishy scans every incoming mail in a Gmail inbox for URLs and then sends the URLs to the GCP AI Platform where the deployed model will either classify it as malicious or benign. The prediction result is then passed back to the Phishy which informs the owner of the inbox with its UI.  
+
 
 ### Installation
-  * cd `/classfier/` and run `python setup.py install`
+  * run `python setup.py install`
   * Installs the project and downloads the dependencies needed:
     * pandas
     * numpy
     * scikit-learn 0.20.4 (GCP AI Platform only accepts version 0.20.4)
 ### Usage 
-  * cd `/classfier/` and run `python run_pipeline.py`
+  * run `python run_pipeline.py`
     1. Reads the raw data files of different formats and merges them into one uniform dataframe
     2. Calculates 51 new features for each URL based its properties of domain, query, path, file extension etc.
     3. Train and evaluate the following 3 ML models:
