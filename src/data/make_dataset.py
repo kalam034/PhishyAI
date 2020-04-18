@@ -74,7 +74,7 @@ def make_dataset():
     benign_df = read_benign()
     malicious_df = read_malicious()
 
-    print("Merging all collected data")
+    print("Merging all collected data sets")
 
     merged_df = pd.concat([open_phish_df, unb_df, phish_storm_df, phish_tank_df,
                            benign_df, malicious_df], sort=True, axis=0)

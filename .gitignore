@@ -1,5 +1,6 @@
 **/__pycache__
 /dist/*
 /build/*
-phishy_classifier.egg-info/*
-phishy-classifier.code-workspace
+phishyAI.egg-info/*
+phishyAI.code-workspace
+
