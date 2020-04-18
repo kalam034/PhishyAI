@@ -5,7 +5,7 @@ PhishyAI trains ML models for [Phishy](https://github.com/morch028/phishy), a Gm
 The models are trained with data set consisting of 456,577 (URLs) records in total with 35% of records labeled as malicious and 65% benign. 51 new features are calculated for each URL based on its properties of domain, path, query, file extension and fragment. The trained models are then tested with unseen data and scores for Accuracy, F1, Precision and Recall are collected. The models are then deployed on [GCP AI Platform](https://cloud.google.com/ai-platform) to predict URLs in real time for [Phishy](https://github.com/morch028/phishy) via API calls. 
 
 ### Installation
-* Execute the following commands:
+* Run the following commands:
 	```
 	git clone https://github.com/kalam034/phishy
 	cd PhishyML
